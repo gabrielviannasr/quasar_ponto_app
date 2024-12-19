@@ -2,9 +2,7 @@
   <q-page class="q-pa-md login-page">
     <div class="content">
       <!-- Logo e Título -->
-      <div class="q-pt-md">
-        <q-img src="~assets/logo_app.png" alt="Logo do App" class="logo-app" />
-      </div>
+      <q-img src="~assets/logo_app.png" alt="Logo do App" class="logo-app" />
 
       <div class="title q-px-md">
         Sistema de Identificação de Registro<br />
@@ -89,8 +87,9 @@ export default {
 }
 
 .logo-app {
-  width: 100px;
+  width: 180px;
   margin-bottom: 16px;
+  margin-top: 50px;
 }
 
 .title {
