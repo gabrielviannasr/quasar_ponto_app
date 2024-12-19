@@ -5,7 +5,7 @@
     </q-page-container>
 
     <!-- Footer com abas -->
-    <q-footer class="bg-white text-black" elevated>
+    <!-- <q-footer class="bg-white text-black" elevated>
       <q-tabs
         align="justify"
         v-model="tab"
@@ -17,7 +17,7 @@
         <q-route-tab to="/tela2" label="Tela 2" icon="list" />
         <q-route-tab to="/tela3" label="Tela 3" icon="person" />
       </q-tabs>
-    </q-footer>
+    </q-footer> -->
   </q-layout>
 </template>
 
