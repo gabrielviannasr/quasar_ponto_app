@@ -1,5 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    <!-- Header -->
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -10,88 +11,156 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title>SIREPA</q-toolbar-title>
+        <!-- <div
+          class="q-mx-md"
+          style="
+            font-family: 'Roboto Flex', sans-serif;
+            font-size: 14px;
+            color: #003366;
+          "
+        >
+          v{{ appVersion }}
+        </div> -->
       </q-toolbar>
     </q-header>
 
     <!-- Menu Lateral -->
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <!-- Usando Flexbox para organizar conteúdo -->
-      <q-list class="fit column justify-between">
+      <q-list
+        class="q-pa-none"
+        style="display: flex; flex-direction: column; height: 100%"
+      >
         <!-- Informações do usuário no topo -->
-        <div class="q-pa-md">
-          <!-- Círculo com a letra "U" -->
-          <div class="q-pa-md">
-            <div
-              class="circle"
+        <div class="q-pa-md text-center" style="padding-top: 40px">
+          <!-- Círculo com a imagem do usuário -->
+          <div
+            class="circle"
+            style="
+              width: 216px;
+              height: 216px;
+              border-radius: 50%;
+              background-color: #003366;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0 auto;
+            "
+          >
+            <q-img
+              src="~assets/User.png"
+              alt="User Image"
               style="
-                width: 70px;
-                height: 70px;
-                border-radius: 50%;
-                background-color: #2196f3;
-                padding: 4px;
-                background: linear-gradient(45deg, yellow, orange);
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                width: 160px;
+                height: 160px;
+                object-fit: cover;
+                display: block;
+                margin: 0 auto;
               "
-            >
-              <div
-                style="
-                  width: 100%;
-                  height: 100%;
-                  border-radius: 50%;
-                  background-color: #2196f3;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: white;
-                  font-size: 28px;
-                  font-weight: bold;
-                "
-              >
-                U
-              </div>
-            </div>
+            />
           </div>
 
-          <q-item>
-            <q-item-section>
-              <div class="text-h4 text-bold">{{ firstName }}</div>
-              <!-- Nome com fonte maior -->
-              <div class="text-body2 q-mt-md">{{ email }}</div>
-              <!-- E-mail -->
-              <div class="text-caption q-mt-md">{{ companyName }}</div>
-              <!-- Nome da empresa -->
+          <!-- Texto Olá Alan Amaral -->
+          <div
+            class="q-mt-md"
+            style="
+              font-family: 'Roboto Slab', serif;
+              font-weight: bold;
+              font-size: 24px;
+              color: #003366;
+            "
+          >
+            Olá Alan Amaral!
+          </div>
+
+          <!-- Data -->
+          <div
+            class="q-mt-md"
+            style="
+              font-family: 'Roboto Slab', serif;
+              font-size: 18px;
+              color: #003366;
+            "
+          >
+            Quinta-feira, 31 de outubro de 2024
+          </div>
+        </div>
+
+        <!-- Espaço entre a data e os itens do menu -->
+        <div class="q-mt-lg"></div>
+        <!-- Espaçamento aqui -->
+
+        <!-- Itens do Menu -->
+        <div
+          class="q-pa-none"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+          "
+        >
+          <q-item clickable class="items-center">
+            <q-item-section avatar>
+              <q-img src="~assets/icons/Face ID.png" />
             </q-item-section>
+            <q-item-section> Registrar ponto </q-item-section>
+          </q-item>
+
+          <q-item clickable class="items-center">
+            <q-item-section avatar>
+              <q-img src="~assets/icons/Historical.png" />
+            </q-item-section>
+            <q-item-section> Meu histórico </q-item-section>
+          </q-item>
+
+          <q-item clickable class="items-center">
+            <q-item-section avatar>
+              <q-img src="~assets/icons/Submit Document.png" />
+            </q-item-section>
+            <q-item-section> Registrar falta </q-item-section>
+          </q-item>
+
+          <q-item clickable class="items-center">
+            <q-item-section avatar>
+              <q-img src="~assets/icons/Settings.png" />
+            </q-item-section>
+            <q-item-section> Configurações </q-item-section>
+          </q-item>
+
+          <q-item clickable class="items-center">
+            <q-item-section avatar>
+              <q-img src="~assets/icons/About.png" />
+            </q-item-section>
+            <q-item-section> Sobre o sistema </q-item-section>
+          </q-item>
+
+          <q-item clickable @click="logout" class="items-center">
+            <q-item-section avatar>
+              <q-img src="~assets/icons/Emergency Exit.png" />
+            </q-item-section>
+            <q-item-section> Sair do app </q-item-section>
           </q-item>
         </div>
 
-        <!-- Rodapé com Política de Privacidade, Versão e Sair -->
-        <div>
-          <q-separator />
-
-          <q-item clickable @click="openPrivacyPolicy">
-            <q-item-section>Política de Privacidade</q-item-section>
-          </q-item>
-
-          <q-separator />
-
-          <q-item>
-            <q-item-section>Versão {{ appVersion }}</q-item-section>
-          </q-item>
-
-          <q-separator />
-
-          <q-item clickable @click="logout">
-            <q-item-section>Sair</q-item-section>
-          </q-item>
+        <!-- Footer dentro do Drawer (alinhado ao final) -->
+        <div style="margin-top: auto; text-align: center; padding: 20px 0">
+          <div
+            style="
+              font-family: 'Roboto Flex', sans-serif;
+              font-size: 12px;
+              color: #003366;
+            "
+          >
+            © 2024 Prodepa. Todos os direitos reservados.
+          </div>
         </div>
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <!-- Página de Conteúdo -->
+    <q-page-container class="bg-white text-primary">
+      <!-- Conteúdo principal -->
       <router-view />
     </q-page-container>
   </q-layout>
@@ -106,39 +175,72 @@ export default defineComponent({
   setup() {
     const leftDrawerOpen = ref(false);
 
-    // Informações do usuário (essas seriam dinâmicas em uma aplicação real)
-    const firstName = ref("Usuário");
-    const email = ref("usuario@exemplo.com");
-    const companyName = ref(
-      "PRODEPA - Empresa de Tecnologia da Informação e Comunicação do Estado do Pará"
-    );
+    // Informações da versão do app
     const appVersion = ref("1.0.0");
 
-    // Funções para ações
-    const toggleLeftDrawer = () => {
-      leftDrawerOpen.value = !leftDrawerOpen.value;
-    };
-
-    const openPrivacyPolicy = () => {
-      console.log("Abrindo política de privacidade");
-      // Aqui pode-se abrir uma página ou modal de política de privacidade
-    };
-
+    // Função para deslogar
     const logout = () => {
       console.log("Deslogando...");
       // Aqui vai a lógica para deslogar o usuário
     };
 
+    // Função para alternar o menu lateral
+    const toggleLeftDrawer = () => {
+      leftDrawerOpen.value = !leftDrawerOpen.value;
+    };
+
     return {
       leftDrawerOpen,
-      firstName,
-      email,
-      companyName,
       appVersion,
-      toggleLeftDrawer,
-      openPrivacyPolicy,
       logout,
+      toggleLeftDrawer,
     };
   },
 });
 </script>
+
+<style scoped>
+/* Círculo com a imagem do usuário */
+.circle {
+  width: 216px;
+  height: 216px;
+  border-radius: 50%;
+  background-color: #003366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Menu de itens */
+.q-item {
+  font-family: "Roboto Flex", sans-serif;
+  font-size: 24px;
+  color: #003366;
+}
+
+.q-item-section {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Alinha ícones e texto no centro */
+}
+
+/* Ajuste para footer dentro do drawer */
+.q-drawer .q-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.q-drawer .q-list div:last-child {
+  margin-top: auto; /* Faz o footer ficar na parte inferior do drawer */
+}
+
+/* Ajuste da estrutura do menu */
+.q-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espaço entre a data e os itens do menu */
+  height: 100%;
+}
+</style>
