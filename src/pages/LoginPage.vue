@@ -23,13 +23,20 @@
         />
 
         <q-input
-          standout="bg-cyan"
-          placeholder="Insira sua senha"
           v-model="model.senha"
-          type="password"
+          standout="bg-cyan"
           input-class="text-white text-center"
           class="bg-blue-10"
-        />
+          :type="isPwd ? 'password' : 'text'"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
 
         <q-btn
           push
@@ -65,6 +72,7 @@
 export default {
   data() {
     return {
+      isPwd: true, // Show and hide the password
       model: {
         cpf: "",
         senha: "",
