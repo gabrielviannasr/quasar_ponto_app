@@ -10,29 +10,32 @@
       </div>
 
       <!-- Texto central e inputs -->
-      <div class="login-container">
+      <div class="login-container q-gutter-sm">
         <div class="login-title">Faça seu login</div>
+
         <q-input
-          filled
-          class="input-field"
+          standout="bg-cyan"
+          v-model="model.cpf"
           placeholder="Insira seu CPF"
-          v-model="cpf"
+          input-class="text-white text-center"
+          class="bg-blue-10"
         />
+
         <q-input
-          filled
-          class="input-field"
-          color="#ffffff"
+          standout="bg-cyan"
           placeholder="Insira sua senha"
-          v-model="senha"
+          v-model="model.senha"
           type="password"
-          style="color: #ffffff"
+          input-class="text-white text-center"
+          class="bg-blue-10"
         />
 
         <q-btn
           push
+          no-caps
           label="Entrar"
           color="primary"
-          class="login-button"
+          style="width: 60%; font-size: 16px"
           @click="handleLogin"
         />
 
@@ -61,8 +64,10 @@
 export default {
   data() {
     return {
-      cpf: "",
-      senha: "",
+      model: {
+        cpf: "",
+        senha: "",
+      },
     };
   },
   methods: {
@@ -113,7 +118,7 @@ export default {
   margin-bottom: 8px;
 }
 
-.input-field {
+/* .input-field {
   background-color: #003366;
   color: #ffffff;
   font-size: 16px;
@@ -126,7 +131,7 @@ export default {
   font-size: 16px;
   width: 60%;
   margin-top: 8px;
-}
+} */
 
 .forgot-password {
   font-size: 12px;
