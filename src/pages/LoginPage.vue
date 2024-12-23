@@ -24,9 +24,11 @@
 
         <q-input
           v-model="model.senha"
+          placeholder="Insira sua senha"
           standout="bg-cyan"
           input-class="text-white text-center"
           class="bg-blue-10"
+          style="padding-left: 35px"
           :type="isPwd ? 'password' : 'text'"
         >
           <template v-slot:append>
