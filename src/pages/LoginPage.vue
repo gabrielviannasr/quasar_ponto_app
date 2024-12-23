@@ -29,6 +29,7 @@
         />
 
         <q-btn
+          push
           label="Entrar"
           color="primary"
           class="login-button"
@@ -123,7 +124,7 @@ export default {
   background-color: #4a90e2;
   color: #ffffff;
   font-size: 16px;
-  width: 100%;
+  width: 60%;
   margin-top: 8px;
 }
 
