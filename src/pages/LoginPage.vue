@@ -19,6 +19,7 @@
           placeholder="Insira seu CPF"
           input-class="text-white text-center"
           class="bg-blue-10"
+          mask="###.###.###-##"
         />
 
         <q-input
