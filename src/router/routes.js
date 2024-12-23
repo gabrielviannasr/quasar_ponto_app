@@ -1,9 +1,9 @@
 const routes = [
-  { path: "/loading", component: () => import("src/pages/LoadingPage.vue") },
+  { path: "/", component: () => import("src/pages/LoadingPage.vue") },
   { path: "/login", component: () => import("src/pages/LoginPage.vue") },
   { path: "/recover", component: () => import("src/pages/RecoverPage.vue") },
   {
-    path: "/",
+    path: "/main",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("src/pages/HomePage.vue") }, // Tela 1
