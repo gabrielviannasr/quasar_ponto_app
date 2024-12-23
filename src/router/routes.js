@@ -1,5 +1,6 @@
 const routes = [
   { path: "/login", component: () => import("src/pages/LoginPage.vue") },
+  { path: "/recover", component: () => import("src/pages/RecoverPage.vue") },
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),

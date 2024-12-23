@@ -11,7 +11,15 @@
 
       <!-- Texto central e inputs -->
       <div class="login-container q-gutter-sm">
-        <div class="login-title">Faça seu login</div>
+        <div class="login-title">Recuperar sua senha</div>
+
+        <q-input
+          standout="bg-cyan"
+          v-model="model.nome"
+          placeholder="Insira seu nome completo"
+          input-class="text-white text-center"
+          class="bg-blue-10"
+        />
 
         <q-input
           standout="bg-cyan"
@@ -22,34 +30,18 @@
           mask="###.###.###-##"
         />
 
-        <q-input
-          v-model="model.senha"
-          standout="bg-cyan"
-          input-class="text-white text-center"
-          class="bg-blue-10"
-          :type="isPwd ? 'password' : 'text'"
-        >
-          <template v-slot:append>
-            <q-icon
-              :name="isPwd ? 'visibility_off' : 'visibility'"
-              class="cursor-pointer"
-              @click="isPwd = !isPwd"
-            />
-          </template>
-        </q-input>
-
         <q-btn
           push
           no-caps
-          label="Entrar"
+          label="Recuperar senha"
           color="primary"
           style="width: 60%; font-size: 16px"
-          @click="handleLogin"
+          @click="handleRecoverPassword"
         />
 
         <div class="forgot-password">
-          <span>Esqueceu sua senha?</span><br />
-          <span class="recover-link">Recuperar minha senha!</span>
+          <span>Já tem uma conta?</span><br />
+          <span class="recover-link">Realizar meu login!</span>
         </div>
       </div>
     </div>
@@ -75,13 +67,13 @@ export default {
       isPwd: true, // Show and hide the password
       model: {
         cpf: "",
-        senha: "",
+        nome: "",
       },
     };
   },
   methods: {
-    handleLogin() {
-      console.log("Tentando logar com CPF:", this.cpf);
+    handleRecoverPassword() {
+      console.log("Tentando recuperar senha:", this.cpf);
     },
   },
 };
