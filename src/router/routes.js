@@ -1,4 +1,5 @@
 const routes = [
+  { path: "/loading", component: () => import("src/pages/LoadingPage.vue") },
   { path: "/login", component: () => import("src/pages/LoginPage.vue") },
   { path: "/recover", component: () => import("src/pages/RecoverPage.vue") },
   {
