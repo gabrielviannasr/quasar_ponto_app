@@ -37,8 +37,8 @@
           <div
             class="circle"
             style="
-              width: 216px;
-              height: 216px;
+              width: 180px;
+              height: 180px;
               border-radius: 50%;
               background-color: #003366;
               display: flex;
@@ -51,8 +51,8 @@
               src="~assets/User.png"
               alt="User Image"
               style="
-                width: 160px;
-                height: 160px;
+                width: 140px;
+                height: 140px;
                 object-fit: cover;
                 display: block;
                 margin: 0 auto;
@@ -78,7 +78,7 @@
             class="q-mt-md"
             style="
               font-family: 'Roboto Slab', serif;
-              font-size: 18px;
+              font-size: 14px;
               color: #003366;
             "
           >
@@ -215,7 +215,7 @@ export default defineComponent({
 /* Menu de itens */
 .q-item {
   font-family: "Roboto Flex", sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   color: #003366;
 }
 
