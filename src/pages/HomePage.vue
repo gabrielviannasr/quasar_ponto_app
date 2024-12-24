@@ -4,26 +4,37 @@
     <div
       class="circle"
       style="
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         background-color: #003366;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 20px auto;
+        margin: 10px auto 5px; /* Margem inferior reduzida */
       "
     >
       <q-img
         src="~assets/User.png"
         alt="User Icon"
-        style="width: 100px; height: 100px; object-fit: cover; display: block"
+        style="width: 90px; height: 90px; object-fit: cover; display: block"
       />
     </div>
 
     <!-- Texto de saudação -->
     <div class="greeting">
-      <h1>Olá, Alan Amaral!</h1>
+      <!-- <h1>Olá, Alan Amaral!!</h1> -->
+      <div
+        class="q-mt-xs"
+        style="
+          font-family: 'Roboto Slab', serif;
+          font-weight: bold;
+          font-size: 24px;
+          color: #003366;
+        "
+      >
+        Olá Alan Amaral!
+      </div>
       <p>Confirmar seu registro?</p>
     </div>
 
@@ -32,10 +43,9 @@
       <q-img
         src="~assets/icons/Clock.png"
         alt="Clock Icon"
-        style="width: 40px; height: 40px; margin-right: 8px"
+        style="width: 35px; height: 35px; margin-right: 8px"
       />
       <span class="current-time">{{ currentTime }}</span>
-      <!-- Exibe o horário dinâmico -->
     </div>
 
     <!-- Área para a câmera -->
@@ -94,48 +104,48 @@ export default {
 }
 
 .greeting h1 {
-  font-size: 24px;
+  font-size: 20px; /* Reduzi o tamanho da fonte */
   font-family: "Roboto Slab", serif;
   color: #003366;
-  margin: 0 0 0;
+  margin: 0px 0 3px; /* Reduzi os espaçamentos */
 }
 
 .greeting p {
-  font-size: 18px;
+  font-size: 16px; /* Reduzi o tamanho da fonte */
   color: #003366;
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* Menor margem inferior */
 }
 
 .clock-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
+  font-size: 35px; /* Reduzi o tamanho da fonte */
   font-family: "Roboto", sans-serif;
   color: #003366;
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* Menor margem inferior */
 }
 
 .camera-container {
   width: 90%;
-  margin: 0 auto 20px;
-  padding: 10px;
+  margin: 0 auto 15px; /* Menor margem inferior */
+  padding: 8px; /* Menor padding */
   border: 2px dashed #cccccc;
   background-color: #f9f9f9;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  height: 250px; /* Reduzi a altura */
 }
 
 .camera-placeholder {
-  font-size: 18px;
+  font-size: 16px; /* Reduzi o tamanho da fonte */
   color: #aaaaaa;
 }
 
 .confirm-button {
   width: 80%;
   margin: 0 auto;
-  font-size: 18px;
+  font-size: 16px; /* Reduzi o tamanho da fonte */
 }
 </style>
