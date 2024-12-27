@@ -27,29 +27,9 @@
       <p>Confirmar seu registro?</p>
     </div>
 
-    <!-- Relógio com ícone -->
-    <div class="clock-container">
-      <q-img
-        src="~assets/icons/Clock.png"
-        alt="Clock Icon"
-        style="width: 35px; height: 35px; margin-right: 8px"
-      />
-      <span class="current-time">{{ currentTime }}</span>
-    </div>
-
     <!-- Área para a câmera -->
-    <div class="camera-container">
-      <div class="camera-placeholder">
-        <!-- Exibição da prévia da imagem capturada -->
-        <img
-          v-if="capturedImage"
-          :src="'data:image/jpeg;base64,' + capturedImage"
-          alt="Foto Capturada"
-          class="captured-image"
-        />
-        <!-- Placeholder caso nenhuma imagem tenha sido capturada -->
-        <p v-else>Câmera Frontal</p>
-      </div>
+    <div class="camera-container" id="cameraPreview">
+      <!-- O plugin renderiza a visualização da câmera aqui -->
     </div>
 
     <!-- Botão de confirmar -->
@@ -59,59 +39,65 @@
       color="primary"
       unelevated
       class="confirm-button"
-      @click="openCamera"
+      @click="captureImage"
     />
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 
 export default {
   name: "HomePage",
   setup() {
-    const currentTime = ref("");
-    const capturedImage = ref(null); // Armazena a imagem capturada
+    const startCameraPreview = () => {
+      console.log("Iniciando pré-visualização da câmera...");
 
-    const updateCurrentTime = () => {
-      const now = new Date();
-      currentTime.value = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+      window.CameraPreview.startCamera({
+        x: 10,
+        y: 200,
+        width: 300,
+        height: 300,
+        camera: "front", // Define para a câmera frontal
+        toBack: false,
+        tapPhoto: false,
+        previewDrag: false,
+        storeToFile: false,
+        disableExifHeaderStripping: true,
       });
     };
 
-    const openCamera = () => {
-      console.log("Abrindo câmera frontal...");
-      navigator.camera.getPicture(
+    const stopCameraPreview = () => {
+      window.CameraPreview.stopCamera();
+      console.log("Pré-visualização da câmera finalizada.");
+    };
+
+    const captureImage = () => {
+      console.log("Capturando imagem...");
+
+      window.CameraPreview.takePicture(
         (imageData) => {
-          capturedImage.value = imageData; // Salva a imagem capturada
           console.log("Imagem capturada com sucesso!");
+          const base64Image = "data:image/jpeg;base64," + imageData;
+          // Exiba ou armazene a imagem capturada
+          alert("Imagem capturada!");
         },
         (error) => {
-          console.error("Erro ao capturar imagem: ", error);
-        },
-        {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL,
-          encodingType: Camera.EncodingType.JPEG,
-          mediaType: Camera.MediaType.PICTURE,
-          correctOrientation: true,
-          cameraDirection: Camera.Direction.FRONT, // Câmera frontal
+          console.error("Erro ao capturar imagem:", error);
         }
       );
     };
 
     onMounted(() => {
-      updateCurrentTime();
-      setInterval(updateCurrentTime, 1000); // Atualiza o horário a cada segundo
+      startCameraPreview();
+    });
+
+    onUnmounted(() => {
+      stopCameraPreview();
     });
 
     return {
-      currentTime,
-      capturedImage,
-      openCamera,
+      captureImage,
     };
   },
 };
@@ -125,54 +111,29 @@ export default {
 }
 
 .greeting h1 {
-  font-size: 20px; /* Reduzi o tamanho da fonte */
+  font-size: 20px;
   font-family: "Roboto Slab", serif;
   color: #003366;
-  margin: 5px 0 3px; /* Reduzi os espaçamentos */
+  margin: 5px 0 3px;
 }
 
 .greeting p {
-  font-size: 16px; /* Reduzi o tamanho da fonte */
+  font-size: 16px;
   color: #003366;
-  margin-bottom: 8px; /* Menor margem inferior */
-}
-
-.clock-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 35px; /* Reduzi o tamanho da fonte */
-  font-family: "Roboto", sans-serif;
-  color: #003366;
-  margin-bottom: 8px; /* Menor margem inferior */
+  margin-bottom: 8px;
 }
 
 .camera-container {
-  width: 90%;
-  margin: 0 auto 15px; /* Menor margem inferior */
-  padding: 8px; /* Menor padding */
-  border: 2px dashed #cccccc;
-  background-color: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 250px; /* Reduzi a altura */
-}
-
-.camera-placeholder {
-  font-size: 16px; /* Reduzi o tamanho da fonte */
-  color: #aaaaaa;
-}
-
-.captured-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 300px; /* Largura do quadrado da câmera */
+  height: 300px; /* Altura do quadrado da câmera */
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
 
 .confirm-button {
   width: 80%;
   margin: 0 auto;
-  font-size: 16px; /* Reduzi o tamanho da fonte */
+  font-size: 16px;
 }
 </style>
