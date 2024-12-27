@@ -37,7 +37,7 @@
       <span class="current-time">{{ currentTime }}</span>
     </div>
 
-    <!-- Preview da câmera -->
+    <!-- Área para a câmera -->
     <div id="camera-container" class="camera-container"></div>
 
     <!-- Botão de confirmar -->
@@ -47,19 +47,20 @@
       color="primary"
       unelevated
       class="confirm-button"
-      @click="confirmRegister"
+      @click="capturePhoto"
     />
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 export default {
   name: "HomePage",
   setup() {
     const currentTime = ref("");
 
+    // Atualiza o horário
     const updateCurrentTime = () => {
       const now = new Date();
       currentTime.value = now.toLocaleTimeString([], {
@@ -69,49 +70,53 @@ export default {
       });
     };
 
-    const startCameraPreview = () => {
-      const cameraContainer = document.getElementById("camera-container");
+    // Configuração da câmera
+    const initializeCameraPreview = () => {
+      const container = document.getElementById("camera-container");
+      const rect = container.getBoundingClientRect();
 
-      if (window.CameraPreview) {
-        // Configuração para iniciar a câmera no container correto
-        CameraPreview.startCamera({
-          x: cameraContainer.offsetLeft,
-          y: cameraContainer.offsetTop,
-          width: cameraContainer.offsetWidth,
-          height: cameraContainer.offsetHeight,
-          camera: CameraPreview.CAMERA_DIRECTION.FRONT,
-          toBack: false,
-          previewDrag: false,
-          tapPhoto: false,
-        });
-
-        console.log("Camera Preview iniciado!");
-      } else {
-        console.error("Camera Preview não está disponível.");
-      }
+      // Inicia a câmera no formato quadrado
+      CameraPreview.startCamera({
+        x: rect.x,
+        y: rect.y,
+        width: rect.width, // A largura do quadrado
+        height: rect.height, // A altura do quadrado
+        camera: CameraPreview.CAMERA_DIRECTION.FRONT,
+        toBack: false,
+        tapPhoto: false,
+        previewDrag: false,
+      });
     };
 
-    const confirmRegister = () => {
-      console.log("Registro confirmado!");
+    const stopCameraPreview = () => {
+      CameraPreview.stopCamera();
+    };
+
+    const capturePhoto = () => {
+      CameraPreview.takePicture({ quality: 85 }, (data) => {
+        console.log("Foto capturada: ", data);
+      });
     };
 
     onMounted(() => {
       updateCurrentTime();
       setInterval(updateCurrentTime, 1000); // Atualiza o horário a cada segundo
+      initializeCameraPreview(); // Inicia a câmera
+    });
 
-      // Inicia a câmera no container designado
-      startCameraPreview();
+    onBeforeUnmount(() => {
+      stopCameraPreview(); // Para a câmera ao sair da página
     });
 
     return {
       currentTime,
-      confirmRegister,
+      capturePhoto,
     };
   },
 };
 </script>
 
-<style scoped>
+<style>
 .home-page {
   background-color: #ffffff;
   padding: 20px;
@@ -142,12 +147,10 @@ export default {
 }
 
 .camera-container {
-  width: 90%;
+  width: 250px; /* Ajuste a largura do quadrado da câmera */
+  height: 250px; /* Ajuste a altura do quadrado da câmera */
   margin: 0 auto 15px;
-  background-color: #f9f9f9;
-  height: 250px;
-  border: 2px dashed #cccccc;
-  position: relative; /* Para alinhar a câmera corretamente */
+  position: relative;
   overflow: hidden;
 }
 
