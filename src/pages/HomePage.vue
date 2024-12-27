@@ -27,10 +27,18 @@
       <p>Confirmar seu registro?</p>
     </div>
 
-    <!-- Área para a câmera -->
-    <div class="camera-container" id="cameraPreview">
-      <!-- O plugin renderiza a visualização da câmera aqui -->
+    <!-- Relógio com ícone -->
+    <div class="clock-container">
+      <q-img
+        src="~assets/icons/Clock.png"
+        alt="Clock Icon"
+        style="width: 35px; height: 35px; margin-right: 8px"
+      />
+      <span class="current-time">{{ currentTime }}</span>
     </div>
+
+    <!-- Preview da câmera -->
+    <div id="camera-container" class="camera-container"></div>
 
     <!-- Botão de confirmar -->
     <q-btn
@@ -39,71 +47,71 @@
       color="primary"
       unelevated
       class="confirm-button"
-      @click="captureImage"
+      @click="confirmRegister"
     />
   </div>
 </template>
 
 <script>
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted } from "vue";
 
 export default {
   name: "HomePage",
   setup() {
-    const startCameraPreview = () => {
-      console.log("Iniciando pré-visualização da câmera...");
+    const currentTime = ref("");
 
-      window.CameraPreview.startCamera({
-        x: 10,
-        y: 200,
-        width: 300,
-        height: 300,
-        camera: "front", // Define para a câmera frontal
-        toBack: false,
-        tapPhoto: false,
-        previewDrag: false,
-        storeToFile: false,
-        disableExifHeaderStripping: true,
+    const updateCurrentTime = () => {
+      const now = new Date();
+      currentTime.value = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
       });
     };
 
-    const stopCameraPreview = () => {
-      window.CameraPreview.stopCamera();
-      console.log("Pré-visualização da câmera finalizada.");
+    const startCameraPreview = () => {
+      const cameraContainer = document.getElementById("camera-container");
+
+      if (window.CameraPreview) {
+        // Configuração para iniciar a câmera no container correto
+        CameraPreview.startCamera({
+          x: cameraContainer.offsetLeft,
+          y: cameraContainer.offsetTop,
+          width: cameraContainer.offsetWidth,
+          height: cameraContainer.offsetHeight,
+          camera: CameraPreview.CAMERA_DIRECTION.FRONT,
+          toBack: false,
+          previewDrag: false,
+          tapPhoto: false,
+        });
+
+        console.log("Camera Preview iniciado!");
+      } else {
+        console.error("Camera Preview não está disponível.");
+      }
     };
 
-    const captureImage = () => {
-      console.log("Capturando imagem...");
-
-      window.CameraPreview.takePicture(
-        (imageData) => {
-          console.log("Imagem capturada com sucesso!");
-          const base64Image = "data:image/jpeg;base64," + imageData;
-          // Exiba ou armazene a imagem capturada
-          alert("Imagem capturada!");
-        },
-        (error) => {
-          console.error("Erro ao capturar imagem:", error);
-        }
-      );
+    const confirmRegister = () => {
+      console.log("Registro confirmado!");
     };
 
     onMounted(() => {
+      updateCurrentTime();
+      setInterval(updateCurrentTime, 1000); // Atualiza o horário a cada segundo
+
+      // Inicia a câmera no container designado
       startCameraPreview();
     });
 
-    onUnmounted(() => {
-      stopCameraPreview();
-    });
-
     return {
-      captureImage,
+      currentTime,
+      confirmRegister,
     };
   },
 };
 </script>
 
-<style>
+<style scoped>
 .home-page {
   background-color: #ffffff;
   padding: 20px;
@@ -123,11 +131,23 @@ export default {
   margin-bottom: 8px;
 }
 
+.clock-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  font-family: "Roboto", sans-serif;
+  color: #003366;
+  margin-bottom: 8px;
+}
+
 .camera-container {
-  width: 300px; /* Largura do quadrado da câmera */
-  height: 300px; /* Altura do quadrado da câmera */
-  margin: 0 auto;
-  position: relative;
+  width: 90%;
+  margin: 0 auto 15px;
+  background-color: #f9f9f9;
+  height: 250px;
+  border: 2px dashed #cccccc;
+  position: relative; /* Para alinhar a câmera corretamente */
   overflow: hidden;
 }
 
