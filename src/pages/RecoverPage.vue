@@ -41,7 +41,9 @@
 
         <div class="forgot-password">
           <span>Já tem uma conta?</span><br />
-          <span class="recover-link">Realizar meu login!</span>
+          <router-link class="recover-link" to="/login">
+            Realizar meu login!
+          </router-link>
         </div>
       </div>
     </div>
