@@ -53,14 +53,16 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 
 export default {
   name: "HomePage",
-  setup() {
+  props: {
+    isMenuOpen: Boolean, // Propriedade passada pelo layout para saber o estado do menu
+  },
+  setup(props) {
     const currentTime = ref("");
 
-    // Atualiza o horário
     const updateCurrentTime = () => {
       const now = new Date();
       currentTime.value = now.toLocaleTimeString([], {
@@ -70,17 +72,15 @@ export default {
       });
     };
 
-    // Configuração da câmera
     const initializeCameraPreview = () => {
       const container = document.getElementById("camera-container");
       const rect = container.getBoundingClientRect();
 
-      // Inicia a câmera no formato quadrado
       CameraPreview.startCamera({
         x: rect.x,
         y: rect.y,
-        width: rect.width, // A largura do quadrado
-        height: rect.height, // A altura do quadrado
+        width: rect.width,
+        height: rect.height,
         camera: CameraPreview.CAMERA_DIRECTION.FRONT,
         toBack: false,
         tapPhoto: false,
@@ -98,14 +98,26 @@ export default {
       });
     };
 
+    // Observa mudanças no estado do menu
+    watch(
+      () => props.isMenuOpen,
+      (newVal) => {
+        if (newVal) {
+          stopCameraPreview(); // Para a câmera quando o menu é aberto
+        } else {
+          initializeCameraPreview(); // Reinicia a câmera quando o menu é fechado
+        }
+      }
+    );
+
     onMounted(() => {
       updateCurrentTime();
-      setInterval(updateCurrentTime, 1000); // Atualiza o horário a cada segundo
-      initializeCameraPreview(); // Inicia a câmera
+      setInterval(updateCurrentTime, 1000);
+      initializeCameraPreview();
     });
 
     onBeforeUnmount(() => {
-      stopCameraPreview(); // Para a câmera ao sair da página
+      stopCameraPreview();
     });
 
     return {

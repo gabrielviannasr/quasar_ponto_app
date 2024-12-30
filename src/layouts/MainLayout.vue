@@ -161,7 +161,7 @@
     <!-- Página de Conteúdo -->
     <q-page-container class="bg-white text-primary">
       <!-- Conteúdo principal -->
-      <router-view />
+      <router-view :isMenuOpen="leftDrawerOpen" />
     </q-page-container>
   </q-layout>
 </template>
