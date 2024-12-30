@@ -49,9 +49,16 @@
           @click="handleLogin"
         />
 
-        <div class="forgot-password">
-          <span>Esqueceu sua senha?</span><br />
-          <span class="recover-link">Recuperar minha senha!</span>
+        <div class="forgot-password-container">
+          <div class="forgot-password">
+            <span>Ainda não tem conta?</span><br />
+            <span class="recover-link">Fazer meu registro!</span>
+          </div>
+
+          <div class="forgot-password">
+            <span>Esqueceu sua senha?</span><br />
+            <span class="recover-link">Recuperar minha senha!</span>
+          </div>
         </div>
       </div>
     </div>
@@ -145,10 +152,18 @@ export default {
   margin-top: 8px;
 } */
 
-.forgot-password {
-  font-size: 12px;
-  color: #003366;
+.forgot-password-container {
+  display: flex;
+  justify-content: space-between; /* Ajusta o espaço entre as divs */
+  align-items: center; /* Alinha as divs verticalmente */
+  gap: 16px; /* Espaço entre as divs */
   margin-top: 16px;
+}
+
+.forgot-password {
+  font-size: 10px;
+  color: #003366;
+  text-align: center; /* Centraliza o texto dentro de cada div */
 }
 
 .recover-link {
