@@ -1,7 +1,217 @@
 <template>
-  <q-page>
-    <div class="q-pa-md">
-      <h1 class="text-center">Tela 2</h1>
+  <q-page class="q-pa-md register-page">
+    <div class="content">
+      <!-- Logo e Título -->
+      <q-img src="~assets/logo_app.png" alt="Logo do App" class="logo-app" />
+
+      <div class="title q-px-md">
+        Sistema de Identificação de Registro<br />
+        Eletrônico do Estado do Pará
+      </div>
+
+      <!-- Texto central e inputs -->
+      <div class="register-container q-gutter-sm">
+        <div class="register-title">Faça seu registro</div>
+
+        <q-input
+          standout="bg-cyan"
+          v-model="model.nome"
+          placeholder="Insira seu nome completo"
+          input-class="text-white text-center"
+          class="bg-blue-10"
+        />
+
+        <q-input
+          standout="bg-cyan"
+          v-model="model.cpf"
+          placeholder="Insira seu CPF"
+          input-class="text-white text-center"
+          class="bg-blue-10"
+          mask="###.###.###-##"
+        />
+
+        <q-select
+          standout="bg-cyan"
+          v-model="model.instituicao"
+          :option-label="(item) => item.nome"
+          :option-value="(item) => item"
+          :options="instituicoes"
+          label="Selecione a sua instituição"
+          label-color="white"
+          class="bg-blue-10"
+        />
+
+        <q-input
+          standout="bg-cyan"
+          v-model="model.senha"
+          placeholder="Insira sua senha"
+          input-class="text-white text-center"
+          class="bg-blue-10"
+          style="padding-left: 35px"
+          :type="isPwd ? 'password' : 'text'"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
+
+        <q-input
+          standout="bg-cyan"
+          v-model="model.confirmarSenha"
+          placeholder="Insira sua senha novamente"
+          input-class="text-white text-center"
+          class="bg-blue-10"
+          style="padding-left: 35px"
+          :type="isPwdConfirm ? 'password' : 'text'"
+        >
+          <template v-slot:append>
+            <q-icon
+              :name="isPwdConfirm ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwdConfirm = !isPwdConfirm"
+            />
+          </template>
+        </q-input>
+
+        <q-btn
+          push
+          no-caps
+          label="Registrar"
+          color="primary"
+          style="width: 60%; font-size: 16px"
+          @click="handleRegister"
+        />
+
+        <div class="forgot-password-container">
+          <div class="forgot-password">
+            <span>Já tem uma conta?</span><br />
+            <router-link class="recover-link" to="/login">
+              Realizar meu login!
+            </router-link>
+          </div>
+
+          <div class="forgot-password">
+            <span>Esqueceu sua senha?</span><br />
+            <router-link class="recover-link" to="/recover">
+              Recuperar minha senha!
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <img
+        src="~assets/logo_prodepa.png"
+        alt="Logo Prodepa"
+        class="logo-prodepa"
+      />
+      <div class="footer-text">
+        © 2024 Prodepa. Todos os direitos reservados.
+      </div>
     </div>
   </q-page>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isPwd: true, // Show and hide the password
+      isPwdConfirm: true, // Show and hide the confirm password
+      model: {
+        nome: "",
+        cpf: "",
+        instituicao: "",
+        senha: "",
+        confirmarSenha: "",
+      },
+      instituicoes: [
+        { id: "Instituição A", nome: "Instituição A" },
+        { id: "Instituição B", nome: "Instituição B" },
+        { id: "Instituição C", nome: "Instituição C" },
+      ],
+    };
+  },
+  methods: {
+    handleRegister() {
+      console.log("Dados do registro:", this.model);
+      // Aqui você pode implementar a lógica para enviar os dados do registro
+    },
+  },
+};
+</script>
+
+<style scoped>
+.register-page {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80vh;
+}
+
+.content {
+  text-align: center;
+}
+
+.logo-app {
+  width: 180px;
+  margin-bottom: 16px;
+  margin-top: 50px;
+}
+
+.title {
+  font-family: "Roboto Slab", serif;
+  font-size: 16px;
+  color: #003366;
+  margin-bottom: 80px;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 300px;
+}
+
+.register-title {
+  font-family: "Roboto Flex", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 8px;
+}
+
+.forgot-password-container {
+  display: flex;
+  justify-content: space-between; /* Ajusta o espaço entre as divs */
+  align-items: center; /* Alinha as divs verticalmente */
+  gap: 16px; /* Espaço entre as divs */
+  margin-top: 16px;
+}
+
+.forgot-password {
+  font-size: 10px;
+  color: #003366;
+  text-align: center; /* Centraliza o texto dentro de cada div */
+}
+
+.footer {
+  text-align: center;
+}
+
+.logo-prodepa {
+  width: 120px;
+  margin-bottom: 8px;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #003366;
+}
+</style>
