@@ -100,35 +100,35 @@
             flex-grow: 1;
           "
         >
-          <q-item clickable class="items-center">
+          <q-item clickable class="items-center" to="/">
             <q-item-section avatar>
               <q-img src="~assets/icons/Face ID.png" />
             </q-item-section>
             <q-item-section> Registrar ponto </q-item-section>
           </q-item>
 
-          <q-item clickable class="items-center">
+          <q-item clickable class="items-center" to="/history">
             <q-item-section avatar>
               <q-img src="~assets/icons/Historical.png" />
             </q-item-section>
             <q-item-section> Meu histórico </q-item-section>
           </q-item>
 
-          <q-item clickable class="items-center">
+          <q-item clickable class="items-center" to="/justify">
             <q-item-section avatar>
               <q-img src="~assets/icons/Submit Document.png" />
             </q-item-section>
             <q-item-section> Registrar falta </q-item-section>
           </q-item>
 
-          <q-item clickable class="items-center">
+          <q-item clickable class="items-center" to="/settings">
             <q-item-section avatar>
               <q-img src="~assets/icons/Settings.png" />
             </q-item-section>
             <q-item-section> Configurações </q-item-section>
           </q-item>
 
-          <q-item clickable class="items-center">
+          <q-item clickable class="items-center" to="/about">
             <q-item-section avatar>
               <q-img src="~assets/icons/About.png" />
             </q-item-section>
@@ -181,7 +181,12 @@ export default defineComponent({
     // Função para deslogar
     const logout = () => {
       console.log("Deslogando...");
-      // Aqui vai a lógica para deslogar o usuário
+      // Exemplo de lógica de logout
+      localStorage.clear(); // Remova os dados de autenticação
+      sessionStorage.clear(); // Limpe a sessão, se necessário
+      // Redireciona para a página de login
+      leftDrawerOpen.value = false; // Fecha o menu
+      window.location.href = "/login"; // Alternativa usando o Vue Router: this.$router.push('/login');
     };
 
     // Função para alternar o menu lateral

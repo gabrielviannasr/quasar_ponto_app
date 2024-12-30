@@ -7,7 +7,23 @@ const routes = [
     path: "/main",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("src/pages/HomePage.vue") }, // Tela 1
+      { path: "/home", component: () => import("src/pages/HomePage.vue") },
+      {
+        path: "/about",
+        component: () => import("src/pages/AboutPage.vue"),
+      },
+      {
+        path: "/justify",
+        component: () => import("src/pages/JustifyPage.vue"),
+      },
+      {
+        path: "/history",
+        component: () => import("src/pages/HistoryPage.vue"),
+      },
+      {
+        path: "/settings",
+        component: () => import("src/pages/SettingPage.vue"),
+      },
     ],
   },
 

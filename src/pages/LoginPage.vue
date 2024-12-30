@@ -95,7 +95,7 @@ export default {
   methods: {
     handleLogin() {
       console.log("Tentando logar com CPF:", this.cpf);
-      this.$router.push("/main");
+      this.$router.push("/home");
     },
   },
 };

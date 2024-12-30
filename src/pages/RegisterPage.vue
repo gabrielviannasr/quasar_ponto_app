@@ -38,7 +38,11 @@
           :options="instituicoes"
           label="Selecione a sua instituição"
           label-color="white"
-          class="bg-blue-10"
+          style="color: white"
+          color="white"
+          class="bg-blue-10 text-white"
+          input-class="text-white"
+          input-style="'background-color: #ffff00'"
         />
 
         <q-input
