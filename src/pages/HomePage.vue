@@ -139,7 +139,8 @@ export default {
   font-size: 20px;
   font-family: "Roboto Slab", serif;
   color: #003366;
-  margin: 5px 0 3px;
+  margin: 0px; /* Remove as margens */
+  line-height: 20px; /* Ajusta o espaçamento vertical */
 }
 
 .greeting p {
