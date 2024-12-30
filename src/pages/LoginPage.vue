@@ -52,12 +52,16 @@
         <div class="forgot-password-container">
           <div class="forgot-password">
             <span>Ainda não tem conta?</span><br />
-            <span class="recover-link">Fazer meu registro!</span>
+            <router-link class="recover-link" to="/register">
+              Fazer meu registro!
+            </router-link>
           </div>
 
           <div class="forgot-password">
             <span>Esqueceu sua senha?</span><br />
-            <span class="recover-link">Recuperar minha senha!</span>
+            <router-link class="recover-link" to="/recover">
+              Recuperar minha senha!
+            </router-link>
           </div>
         </div>
       </div>
