@@ -168,11 +168,14 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "MainLayout",
 
   setup() {
+    const router = useRouter();
+
     const leftDrawerOpen = ref(false);
 
     // Informações da versão do app
@@ -186,7 +189,10 @@ export default defineComponent({
       sessionStorage.clear(); // Limpe a sessão, se necessário
       // Redireciona para a página de login
       leftDrawerOpen.value = false; // Fecha o menu
-      window.location.href = "/login"; // Alternativa usando o Vue Router: this.$router.push('/login');
+
+      router.push("/login");
+      // window.location.href = "/#/login"; // Alternativa usando o Vue Router: this.$router.push('/login');
+      // window.location.href = `${window.location.origin}/login`;
     };
 
     // Função para alternar o menu lateral
