@@ -118,7 +118,7 @@
             <q-item-section avatar>
               <q-img src="~assets/icons/Submit Document.png" />
             </q-item-section>
-            <q-item-section> Registrar falta </q-item-section>
+            <q-item-section> Justificar falta </q-item-section>
           </q-item>
 
           <q-item clickable class="items-center" to="/settings">
