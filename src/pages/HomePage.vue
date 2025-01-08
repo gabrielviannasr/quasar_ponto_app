@@ -15,7 +15,7 @@
       "
     >
       <q-img
-        src="~assets/User.png"
+        src="~assets/icons/User.png"
         alt="User Icon"
         style="width: 80px; height: 80px; object-fit: cover; display: block"
       />

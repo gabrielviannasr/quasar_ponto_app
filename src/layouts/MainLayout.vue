@@ -48,7 +48,7 @@
             "
           >
             <q-img
-              src="~assets/User.png"
+              src="~assets/icons/User.png"
               alt="User Image"
               style="
                 width: 140px;
