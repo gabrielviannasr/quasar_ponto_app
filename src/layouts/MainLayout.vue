@@ -100,7 +100,7 @@
             flex-grow: 1;
           "
         >
-          <q-item clickable class="items-center" to="/">
+          <q-item clickable class="items-center" to="/home">
             <q-item-section avatar>
               <q-img src="~assets/icons/Face ID.png" />
             </q-item-section>
